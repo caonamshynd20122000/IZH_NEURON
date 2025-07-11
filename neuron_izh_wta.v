@@ -1,8 +1,11 @@
 
-module NEURON_WTA (
+module NEURON_WTA #(
+	parameter			DIFF_SPIKES = 9
+
+)(
 	input 				CLK,
 	input 				RST,
-	input	[4:0]		DIFF_SPIKE,
+	input	[DIFF_SPIKES:0]		DIFF_SPIKE,
 	input [31:0]	I,
 	
 	output reg 		SPIKE

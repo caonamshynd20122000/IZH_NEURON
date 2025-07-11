@@ -1,0 +1,25 @@
+# Load standard cell library
+read_liberty -lib ~/sky130_workspace/open_pdks/sky130/sky130A/libs.ref/sky130_fd_sc_hdll/lib/sky130_fd_sc_hdll__tt_025C_1v80.lib
+
+# Read RTL source files
+read_verilog -sv -D SYNTHESIS \
+  TOP_NUMBER.v STDP.v new_izh.v AER_BUS.v neuron.v SYNAPTIC.v \
+  RAM.v adder.v mul.v compare.v restoration.v membrane.v neuron_izh_wta.v
+
+# Synthesize the design
+synth -top TOP_NUMBER
+
+# Map flip-flops to standard cells
+dfflibmap -liberty ~/sky130_workspace/open_pdks/sky130/sky130A/libs.ref/sky130_fd_sc_hdll/lib/sky130_fd_sc_hdll__tt_025C_1v80.lib
+
+# Timing constraint: Clock period = 100ns (10 MHz)
+abc -D 100 -liberty ~/sky130_workspace/open_pdks/sky130/sky130A/libs.ref/sky130_fd_sc_hdll/lib/sky130_fd_sc_hdll__tt_025C_1v80.lib
+
+# Clean up
+clean
+
+# Write netlist
+write_verilog TOP_NUMBER_mapped.v
+
+# Report statistics
+tee -o synthesis_report.txt stat -liberty ~/sky130_workspace/open_pdks/sky130/sky130A/libs.ref/sky130_fd_sc_hdll/lib/sky130_fd_sc_hdll__tt_025C_1v80.lib

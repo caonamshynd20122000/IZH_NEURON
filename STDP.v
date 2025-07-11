@@ -155,7 +155,7 @@ module STDP #(
 	always @(posedge CLK) begin
 		if(RST) begin
 			for (i = 0; i < $size(SYN_WEIGHT); i = i + 1) begin
-            	SYN_WEIGHT[i] = 0;
+            	SYN_WEIGHT[i] <= 0;
         	end
 			WE <= 1;
 		end 

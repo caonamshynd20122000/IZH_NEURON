@@ -14,7 +14,7 @@ module RAM #(
 );
 
     // Khai báo RAM (dùng chung cho sim & synth)
-    reg [WEIGHTS : 0] RAM [0 : 255];
+    reg [WEIGHTS : 0] RAM [0 : 63];
 
     // Simulation-only logic
     `ifndef SYNTHESIS
@@ -38,12 +38,12 @@ module RAM #(
             end
         end
     `else
-        // Synthesizable write logic
-        always @(posedge clk) begin
-            if (we)
-                RAM[a] <= di;
-        end
-    `endif
+         // Synthesizable write logic
+         always @(posedge clk) begin
+             if (we)
+                 RAM[a] <= di;
+         end
+     `endif
 
     // Read logic (same for both sim and synth)
     always @(*) begin

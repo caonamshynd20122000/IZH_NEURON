@@ -1,3 +1,7 @@
+/*
+This version is forcing the uut.Pulse <=0
+*/
+
 
 `timescale 1ns/1ps
 
@@ -6,11 +10,11 @@ module TOP_NUMBER_tb;
     // Parameters
     localparam image_num = 9;
     localparam width = 31;
-    localparam neuron_adr = 7;
+    localparam neuron_adr = 5;
     localparam weights = 31;
-    localparam input_neuron_num = 149;
-    localparam training_neuron_num = 6;
-    localparam neuron_num = 155;
+    localparam input_neuron_num = 58;
+    localparam training_neuron_num = 10;
+    localparam neuron_num = 68;
 
     // Inputs
     reg CLK = 0;
@@ -55,63 +59,30 @@ module TOP_NUMBER_tb;
         #(200_000); // wait 200us
 
         //Training Phase with BTN = 1
-         // train_image(0);
-         // train_image(1);
-         // train_image(2);
-         // train_image(3);
-         // train_image(4);
-         // train_image(5);
-
-        // train_image(0);
-        // train_image(1);
-        // train_image(2);
-        // train_image(3);
-        // train_image(4);
-        // train_image(5);
-
-        // train_image(0);
-        // train_image(1);
-        // train_image(2);
-        // train_image(3);
-        // train_image(4);
-        // train_image(5);
-
-        // train_image(0);
-        // train_image(1);
-        // train_image(2);
-        // train_image(3);
-        // train_image(4);
-        // train_image(5);
-
-        // train_image(0);
-        // train_image(1);
-        // train_image(2);
-        // train_image(3);
-        // train_image(4);
-        // train_image(5);
-
-        // train_image(0);
-        // train_image(1);
-        // train_image(2);
-        // train_image(3);
-        // train_image(4);
-        // train_image(5);
-
+        train_image(0);
+        train_image(1);
+        train_image(2);
+        train_image(3);
+        train_image(4);
+        train_image(5);
+        train_image(6);
+        train_image(7);
+        train_image(8);
+        train_image(9);
         // Testing with noise
-        SEL = 0; // Use noisy image
+        SEL = 1; // Use noisy image
         Neuron = 0;
 
-        test_image(0);
-        test_image(1);
-        test_image(2);
-        test_image(3);
-        test_image(4);
-        test_image(5);
-        
         // test_image(0);
-        // test_image(2);
         // test_image(1);
+        // test_image(2);
+        // test_image(3);
+        // test_image(4);
         // test_image(5);
+        // test_image(6);
+        // test_image(7);
+        // test_image(8);
+        // test_image(9);
 
         // // Reset and retrain or test again
         // Image = 0;
@@ -142,7 +113,7 @@ module TOP_NUMBER_tb;
         BTN = 1;
         #(10_000); // 10us
         BTN = 0;
-        #(900_000); // 600us
+        #(600_000); // 600us
     end
     endtask
 
@@ -153,104 +124,170 @@ module TOP_NUMBER_tb;
     end
     endtask
 
-int counter_150 = 0;
-int counter_151 = 0;
-int counter_152 = 0;
-int counter_153 = 0;
-int counter_154 = 0;
-int counter_155 = 0;
+int counter_59 = 0;
+int counter_60 = 0;
+int counter_61 = 0;
+int counter_62 = 0;
+int counter_63 = 0;
+int counter_64 = 0;
+int counter_65 = 0;
+int counter_66 = 0;
+int counter_67 = 0;
+int counter_68 = 0;
 
-
-reg prev_match_150 = 0;
-reg prev_match_151 = 0;
-reg prev_match_152 = 0;
-reg prev_match_153 = 0;
-reg prev_match_154 = 0;
-reg prev_match_155 = 0;
+reg prev_match_59 = 0;
+reg prev_match_60 = 0;
+reg prev_match_61 = 0;
+reg prev_match_62 = 0;
+reg prev_match_63 = 0;
+reg prev_match_64 = 0;
+reg prev_match_65 = 0;
+reg prev_match_66 = 0;
+reg prev_match_67 = 0;
+reg prev_match_68 = 0;
 
 always @(posedge CLK) begin
-    if (!prev_match_150 && uut.Training[150].TX.ADDR == 8'd143) begin
-        counter_150 = counter_150 + 1;
-        $display("At time %t: Addr[150] == 144", $time);
+    if (!prev_match_59 && uut.Training[59].TX.ADDR == 6'h30) begin
+        counter_59 = counter_59 + 1;
+        $display("At time %t: Addr[59] == 49", $time);
     end
-    if (!prev_match_151 && uut.Training[151].TX.ADDR == 8'd143) begin
-        counter_151 = counter_151 + 1;
-        $display("At time %t: Addr[151] == 144", $time);
+    if (!prev_match_60 && uut.Training[60].TX.ADDR == 6'h30) begin
+        counter_60 = counter_60 + 1;
+        $display("At time %t: Addr[60] == 49", $time);
     end
-    if (!prev_match_152 && uut.Training[152].TX.ADDR == 8'd143) begin
-        counter_152 = counter_152 + 1;
-        $display("At time %t: Addr[152] == 144", $time);
+    if (!prev_match_61 && uut.Training[61].TX.ADDR == 6'h30) begin
+        counter_61 = counter_61 + 1;
+        $display("At time %t: Addr[61] == 49", $time);
     end
-    if (!prev_match_153 && uut.Training[153].TX.ADDR == 8'd143) begin
-        counter_153 = counter_153 + 1;
-        $display("At time %t: Addr[154] == 144", $time);
+    if (!prev_match_62 && uut.Training[62].TX.ADDR == 6'h30) begin
+        counter_62 = counter_62 + 1;
+        $display("At time %t: Addr[62] == 49", $time);
     end
-    if (!prev_match_154 && uut.Training[154].TX.ADDR == 8'd143) begin
-        counter_154 = counter_154 + 1;
-        $display("At time %t: Addr[154] == 144", $time);
+    if (!prev_match_63 && uut.Training[63].TX.ADDR == 6'h30) begin
+        counter_63 = counter_63 + 1;
+        $display("At time %t: Addr[63] == 49", $time);
     end
-    if (!prev_match_155 && uut.Training[155].TX.ADDR == 8'd143) begin
-        counter_155 = counter_155 + 1;
-        $display("At time %t: Addr[155] == 144", $time);
+    if (!prev_match_64 && uut.Training[64].TX.ADDR == 6'h30) begin
+        counter_64 = counter_64 + 1;
+        $display("At time %t: Addr[64] == 49", $time);
+    end
+    if (!prev_match_65 && uut.Training[65].TX.ADDR == 6'h30) begin
+        counter_65 = counter_65 + 1;
+        $display("At time %t: Addr[65] == 49", $time);
+    end
+    if (!prev_match_66 && uut.Training[66].TX.ADDR == 6'h30) begin
+        counter_66 = counter_66 + 1;
+        $display("At time %t: Addr[66] == 49", $time);
+    end
+    if (!prev_match_67 && uut.Training[67].TX.ADDR == 6'h30) begin
+        counter_67 = counter_67 + 1;
+        $display("At time %t: Addr[67] == 49", $time);
+    end
+    if (!prev_match_68 && uut.Training[68].TX.ADDR == 6'h30) begin
+        counter_68 = counter_68 + 1;
+        $display("At time %t: Addr[68] == 49", $time);
     end
 
     // Update prev_match flags
-    prev_match_150 <= (uut.Training[150].TX.ADDR == 8'd143);
-    prev_match_151 <= (uut.Training[151].TX.ADDR == 8'd143);
-    prev_match_152 <= (uut.Training[152].TX.ADDR == 8'd143);
-    prev_match_153 <= (uut.Training[153].TX.ADDR == 8'd143);
-    prev_match_154 <= (uut.Training[154].TX.ADDR == 8'd143);
-    prev_match_155 <= (uut.Training[155].TX.ADDR == 8'd143);
+    prev_match_59 <= (uut.Training[59].TX.ADDR == 6'h30);
+    prev_match_60 <= (uut.Training[60].TX.ADDR == 6'h30);
+    prev_match_61 <= (uut.Training[61].TX.ADDR == 6'h30);
+    prev_match_62 <= (uut.Training[62].TX.ADDR == 6'h30);
+    prev_match_63 <= (uut.Training[63].TX.ADDR == 6'h30);
+    prev_match_64 <= (uut.Training[64].TX.ADDR == 6'h30);
+    prev_match_65 <= (uut.Training[65].TX.ADDR == 6'h30);
+    prev_match_66 <= (uut.Training[66].TX.ADDR == 6'h30);
+    prev_match_67 <= (uut.Training[67].TX.ADDR == 6'h30);
+    prev_match_68 <= (uut.Training[68].TX.ADDR == 6'h30);
 end
 
 // Stop training when counter hits 6
 always @(posedge CLK) begin
-    if (counter_150 == 2) begin
-        uut.EN_STDP <= 1'b0;
-        uut.EN_Pulse <= 1'b0;
-        $display("Training 150 stopped early at time %t due to counter == 6", $time);
-        counter_150 = 0;
-    end
+if (counter_59 == 6) begin
+    uut.EN_STDP <= 1'b0;
+    uut.EN_Pulse <= 1'b0;
+    uut.Pulse <= 17'b0;
+    $display("Training 59 stopped early at time %t due to counter == 6", $time);
+    counter_59 = 0;
+end
 
-    if (counter_151 == 2) begin
-        uut.EN_STDP <= 1'b0;
-        uut.EN_Pulse <= 1'b0;
-        $display("Training 151 stopped early at time %t due to counter == 6", $time);
-        counter_151 = 0;
-    end
+if (counter_60 == 6) begin
+    uut.EN_STDP <= 1'b0;
+    uut.EN_Pulse <= 1'b0;
+    uut.Pulse <= 17'b0;
+    $display("Training 60 stopped early at time %t due to counter == 6", $time);
+    counter_60 = 0;
+end
 
-    if (counter_152 == 2) begin
-        uut.EN_STDP <= 1'b0;
-        uut.EN_Pulse <= 1'b0;
-        $display("Training 152 stopped early at time %t due to counter == 6", $time);
-        counter_152 = 0;
-    end
+if (counter_61 == 6) begin
+    uut.EN_STDP <= 1'b0;
+    uut.EN_Pulse <= 1'b0;
+    uut.Pulse <= 17'b0;
+    $display("Training 61 stopped early at time %t due to counter == 6", $time);
+    counter_61 = 0;
+end
 
-    if (counter_153 == 2) begin
-        uut.EN_STDP <= 1'b0;
-        uut.EN_Pulse <= 1'b0;
-        $display("Training 153 stopped early at time %t due to counter == 6", $time);
-        counter_153 = 0;
-    end
+if (counter_62 == 6) begin
+    uut.EN_STDP <= 1'b0;
+    uut.EN_Pulse <= 1'b0;
+    uut.Pulse <= 17'b0;
+    $display("Training 62 stopped early at time %t due to counter == 6", $time);
+    counter_62 = 0;
+end
 
-    if (counter_154 == 2) begin
-        uut.EN_STDP <= 1'b0;
-        uut.EN_Pulse <= 1'b0;
-        $display("Training 154 stopped early at time %t due to counter == 6", $time);
-        counter_154 = 0;
-    end
+if (counter_63 == 6) begin
+    uut.EN_STDP <= 1'b0;
+    uut.EN_Pulse <= 1'b0;
+    uut.Pulse <= 17'b0;
+    $display("Training 63 stopped early at time %t due to counter == 6", $time);
+    counter_63 = 0;
+end
 
-    if (counter_155 == 2) begin
-        uut.EN_STDP <= 1'b0;
-        uut.EN_Pulse <= 1'b0;
-        $display("Training 155 stopped early at time %t due to counter == 6", $time);
-        counter_155 = 0;
-    end
+if (counter_64 == 6) begin
+    uut.EN_STDP <= 1'b0;
+    uut.EN_Pulse <= 1'b0;
+    uut.Pulse <= 17'b0;
+    $display("Training 64 stopped early at time %t due to counter == 6", $time);
+    counter_64 = 0;
+end
+
+if (counter_65 == 6) begin
+    uut.EN_STDP <= 1'b0;
+    uut.EN_Pulse <= 1'b0;
+    uut.Pulse <= 17'b0;
+    $display("Training 65 stopped early at time %t due to counter == 6", $time);
+    counter_65 = 0;
+end
+
+if (counter_66 == 6) begin
+    uut.EN_STDP <= 1'b0;
+    uut.EN_Pulse <= 1'b0;
+    uut.Pulse <= 17'b0;
+    $display("Training 66 stopped early at time %t due to counter == 6", $time);
+    counter_66 = 0;
+end
+
+if (counter_67 == 6) begin
+    uut.EN_STDP <= 1'b0;
+    uut.EN_Pulse <= 1'b0;
+    uut.Pulse <= 17'b0;
+    $display("Training 67 stopped early at time %t due to counter == 6", $time);
+    counter_67 = 0;
+end
+
+if (counter_68 == 6) begin
+    uut.EN_STDP <= 1'b0;
+    uut.EN_Pulse <= 1'b0;
+    uut.Pulse <= 17'b0;
+    $display("Training 68 stopped early at time %t due to counter == 6", $time);
+    counter_68 = 0;
+end
+
 end
 
 
     initial begin
-        $dumpfile("TOP_NUMBER_tb.vcd");
+        $dumpfile("TOP_NUMBER_tb_all.vcd");
         $dumpvars(0,TOP_NUMBER_tb);
     end
 endmodule

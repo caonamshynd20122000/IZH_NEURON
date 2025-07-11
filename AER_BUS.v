@@ -57,28 +57,29 @@ module AER_BUS #(parameter NEURON_ADR = 8, NEURON_NUM = 8)(
 	end
 
 	// Encoder
-	always @(posedge CLK) begin
-		integer i;
-		reg found;
-		found = 0;
-		for(i = 0; i <= NEURON_NUM; i = i + 1) begin
-			if(!found && ENC_IN[i] == 1'b1) begin
-				ENC_OUT <= i[NEURON_ADR : 0];
-				ENC_SPIKES <= ENC_IN;
-				ENC_SPIKES [i] <= 1'b0;
-				found = 1 ;
-			end
-
-			else begin
-				ENC_OUT <= {NEURON_ADR + 1{1'b1}};  
-			end
+reg found;
+always @(posedge CLK) begin
+	integer i;
+	found = 0;
+	for(i = 0; i <= NEURON_NUM; i = i + 1) begin
+		if (!found && ENC_IN[i] == 1'b1) begin
+			ENC_OUT <= i[NEURON_ADR:0];
+			ENC_SPIKES <= ENC_IN;
+			ENC_SPIKES[i] <= 1'b0;
+			found = 1;
 		end
 	end
 
+	// If no spike found
+	if (!found) begin
+		ENC_OUT <= {NEURON_ADR + 1{1'b1}};
+	end
+end
+
+
 	assign ADDR = ENC_OUT;
-	always @(*) begin
-		FIFO_EN = (ENC_SPIKES == {NEURON_NUM+1{1'b0}}) ? 1'b1: 1'b0;
-    end
+	assign FIFO_EN = (ENC_SPIKES == {NEURON_NUM+1{1'b0}}) ? 1'b1: 1'b0;
+
 	// Neuron's Enable
 	always @(posedge CLK) begin
 		if(FIFO_EN)

@@ -3,16 +3,17 @@ module IZH_NEURON #(
 	parameter			NUMBER = 1,
 	parameter 			WIDTH = 16,
 	parameter 			NEURON_ADR = 4,
-	parameter 			WEIGHTS = 8
+	parameter 			WEIGHTS = 8,
+	parameter			DIFF_SPIKES = 9
 )(
 	input						CLK,
 	input						RST,
 	input						EN,
 	input						WE,
 	input		[NEURON_ADR:0]	A,
-	input		[NEURON_ADR:0]			DPRA,
+	input		[5:0]			DPRA,
 	input		[31:0]			DI,
-	//input 		[4:0]			DIFF_SPIKE,
+	input 		[DIFF_SPIKES:0]	DIFF_SPIKE,
 
 	output		reg		SPIKE
 );
@@ -46,11 +47,13 @@ module IZH_NEURON #(
 
     );
 
-    NEURON uut_NEURON(
+    NEURON_WTA #(
+    	.DIFF_SPIKES(DIFF_SPIKES)
+    )uut_NEURON_WTA(
     	.CLK(CLK),
     	.RST(RST),
     	.I(I),
-    	//.DIFF_SPIKE(DIFF_SPIKE),
+    	.DIFF_SPIKE(DIFF_SPIKE),
     	.SPIKE(spike)
     );
 
